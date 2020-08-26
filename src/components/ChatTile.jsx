@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 const useStyles = makeStyles({
     tile: {
         width: "100%",
-        height: "50px",
+        height: "auto",
         backgroundColor: "grey",
         borderBottom: "1px solid white"
     },
