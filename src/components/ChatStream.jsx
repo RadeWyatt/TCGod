@@ -21,12 +21,10 @@ class ChatStream extends React.Component {
             channels: [ 'TimTheTatman' ]
         });
         this.client.connect();
-        this.client.on('message', (channel, tags, message, self) => {
-            const author = `${tags['display-name']}`;
-            const msg = `${message}`;
+        this.client.on('message', (channel, user, message, self) => {
             if (this.state.chats.length === 50)
                 this.state.chats.shift();
-            this.state.chats.push([author,msg])
+            this.state.chats.push([user, message])
             this.setState({chats: this.state.chats});
         });
 
@@ -42,7 +40,7 @@ class ChatStream extends React.Component {
 
     render() {
         const items = this.state.chats.map(function(item){
-            return <ChatTile key={uuid()} author={item[0]} message={item[1]}/>;
+            return <ChatTile key={uuid()} user={item[0]} message={item[1]}/>;
         });
         return (
             <>
