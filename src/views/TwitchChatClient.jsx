@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 import ChatStream from "../components/ChatStream";
+import StreamSelect from "../components/StreamSelect";
 
-const useStyles = makeStyles({
+const styles = {
     appcontainer: {
         width: "100%",
         height: "100%",
@@ -12,15 +13,30 @@ const useStyles = makeStyles({
             display: "none"
         }
     },
-});
+};
 
-function TwitchChatClient () {
-    const classes = useStyles();
-    return (
-        <div className={classes.appcontainer}>
-            <ChatStream/>
-        </div>
-    );
+class TwitchChatClient extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            channelName: "",
+        }
+    }
+
+    changeChannel = (newChannel) => {
+        this.setState({channelName: newChannel});
+    }
+
+    render() {
+        const { channelName } = this.state;
+        const { classes } = this.props;
+        return (
+            <div className={classes.appcontainer}>
+                <StreamSelect changeChannel={this.changeChannel}/>
+                <ChatStream channel={channelName}/>
+            </div>
+        );
+    }
 }
 
-export default TwitchChatClient;
+export default withStyles(styles)(TwitchChatClient);
