@@ -1,5 +1,16 @@
 import React from "react";
 import Input from "@material-ui/core/Input";
+import { withStyles } from '@material-ui/styles';
+
+const styles = {
+  mainInput: {
+    backgroundColor: "black",
+  },
+  innerInput: {
+    color: "white", 
+    margin: "0 10px 0 10px"
+  }
+}
 
 class StreamSelect extends React.Component {
   constructor(props) {
@@ -22,17 +33,17 @@ class StreamSelect extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <Input
-        style={{
-            position: "absolute",
-            backgroundColor: "black"
-        }}
+        className={classes.mainInput}
         defaultValue={this.state.channel}
         onChange={this.handleChange}
         onKeyDown={this.keyPress}
         color="secondary"
-        inputProps={{ style: { color: "white", margin: "0 10px 0 10px"}}}
+        inputProps={{ 
+          className: classes.innerInput,
+        }}
         spellCheck={false}
         fullWidth
       />
@@ -40,4 +51,4 @@ class StreamSelect extends React.Component {
   }
 }
 
-export default StreamSelect;
+export default withStyles(styles)(StreamSelect);
