@@ -27,5 +27,11 @@ function createWindow() {
     ipcMain.on('close-window', () => {
         app.quit();
     })
+    ipcMain.on('minimize-window', () => {
+        mainWindow.minimize();
+    })
+    ipcMain.on('maximize-window', () => {
+        mainWindow.maximize();
+    })
 }
 app.on('ready', createWindow);
