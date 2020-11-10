@@ -2,7 +2,7 @@
   "name": "rtc",
   "version": "0.1.0",
   "homepage": "./",
-  "main": "./electron/main.js",
+  "main": "./electron/electron.js",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -13,8 +13,6 @@
     "@testing-library/user-event": "^7.1.2",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
-    "electron": "^9.2.1",
-    "electron-builder": "^22.8.0",
     "electron-is-dev": "^1.2.0",
     "material-ui": "^0.20.2",
     "react": "^16.13.1",
@@ -26,11 +24,14 @@
   },
   "scripts": {
     "dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "start": "cross-env BROWSER=none react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build && cp ./electron/* ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ebuild": "yarn build && node_modules/.bin/build"
+    "ebuild": "yarn build && yarn electron-builder build",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=public/favicon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"CryptoApp\"",
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,5 +47,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^10.1.5",
+    "electron-builder": "^22.9.1"
   }
 }

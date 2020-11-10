@@ -8,7 +8,10 @@ const styles = {
   },
   innerInput: {
     color: "white", 
-    margin: "0 10px 0 10px"
+    margin: "0 10px 0 10px",
+    '&::placeholder': {
+      fontStyle: 'italic',
+    },
   }
 }
 
@@ -40,6 +43,7 @@ class StreamSelect extends React.Component {
         defaultValue={this.state.channel}
         onChange={this.handleChange}
         onKeyDown={this.keyPress}
+        placeholder="enter a channel name..."
         color="secondary"
         inputProps={{ 
           className: classes.innerInput,

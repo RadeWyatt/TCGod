@@ -11,7 +11,7 @@ const styles = {
         height: "100%",
         backgroundColor: "#121212",
         display: "grid",
-        'grid-template-rows': '20px .1fr 1fr',
+        'grid-template-rows': '24px .1fr 1fr',
     },
 };
 
