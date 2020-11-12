@@ -53,9 +53,6 @@ class ChatStream extends React.Component {
         const { client } = this.props;
         client.connect();
         client.on('message', (channel, user, message, self) => {
-            // extract useful information from the message
-            // since some streams have a ton of chats, we don't want to save un-necessary data
-            console.log(message);
             if (this.state.chats.length === 50)
                 this.state.chats.shift();
             this.state.chats.push([user, message])
@@ -71,7 +68,7 @@ class ChatStream extends React.Component {
     render() {
         const { classes } = this.props;
         const items = this.state.chats.map(function(item){
-            return <ChatTile key={uuid()} user={item[0]} message={item[1]} />;
+            return <ChatTile key={uuid()} user={item[0]} message={item[1]}/>;
         });
         return (
             <div className={classes.streamContainer}>
