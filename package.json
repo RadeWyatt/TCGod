@@ -1,55 +1,51 @@
 {
-  "name": "rtc",
-  "version": "0.1.0",
-  "homepage": "./",
+  "name": "TCGod",
+  "version": "1.0.0",
+  "description": "Twitch Chat God",
   "main": "./electron/electron.js",
-  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build": "babel server.js --out-file server.compiled.js",
+    "dev": "nodemon --exec node server.compiled.js",
+    "test": "testcafe \"electron:\" \"./tests/**.js\"",
+    "ebuild": "npm run build && electron-builder build",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "author": "Rade Pilkinton",
+  "license": "ISC",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/styles": "^4.10.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "electron-is-dev": "^1.2.0",
-    "material-ui": "^0.20.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3",
-    "react-uuid": "^1.0.2",
-    "tmi.js": "^1.5.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.10.9",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-twitch-new": "0.0.2",
+    "path": "^0.12.7",
+    "regenerator-runtime": "^0.13.7",
+    "testcafe-browser-provider-electron": "^0.0.15",
     "wait-on": "^5.2.0"
   },
-  "scripts": {
-    "dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "start": "react-scripts start",
-    "build": "react-scripts build && cp ./electron/* ./build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "ebuild": "yarn build && yarn electron-builder build",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=public/favicon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"CryptoApp\"",
-    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.1",
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
     "electron": "^10.1.5",
-    "electron-builder": "^22.9.1"
+    "electron-builder": "^22.9.1",
+    "nodemon": "^2.0.5"
+  },
+  "build": {
+    "files": [
+      "client/build/**/*",
+      "client/node_modules/**/*",
+      "electron/**/*",
+      "node_modules/**/*",
+      "server.compiled.js"
+    ]
   }
 }
